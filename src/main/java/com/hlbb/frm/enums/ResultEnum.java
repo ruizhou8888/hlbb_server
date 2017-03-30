@@ -11,6 +11,7 @@ public enum ResultEnum {
     SIGN_PARAM_ERROR(103,"缺少签名参数"),
     SIGN_ERROR(101,"签名参数错误"),
     NOTFOUND_USER(1001,"用户名或密码错误"),
+    NOTEXSIS_USER(1002,"用户名不存在"),
     ;
 
     private Integer code;
