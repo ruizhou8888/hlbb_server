@@ -2,11 +2,17 @@ package com.hlbb.module.manager;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.hlbb.module.company.Company;
 
 @Entity
 @Table(name="manager")
@@ -19,10 +25,31 @@ public class Manager implements Serializable{
 	private String password;
 	private String randomFactor;
 	private String remark;
-	private Long companyId;
 	private Date lastLoginTime;
 	private int isActive;
 	private int state;
+	
+	@OneToOne
+	@JoinColumn(name="companyId")
+	private Company company;
+	
+	@OneToMany
+	@JoinColumn(name="managerId")
+	private List<ManagerMenu> menus;
+	
+	
+	public Company getCompany() {
+		return company;
+	}
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	public List<ManagerMenu> getMenus() {
+		return menus;
+	}
+	public void setMenus(List<ManagerMenu> menus) {
+		this.menus = menus;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -52,12 +79,6 @@ public class Manager implements Serializable{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-	public Long getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
 	}
 	public Date getLastLoginTime() {
 		return lastLoginTime;

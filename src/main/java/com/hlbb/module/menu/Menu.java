@@ -19,10 +19,7 @@ public class Menu implements Serializable{
 	private String moduleRoute;
 	private String moduleIcon;
 	private String parentId;
-	private String createdTime;
-	private Long createId;
-	private Date updatedTime;
-	private Long updated_id;
+
 	public Long getId() {
 		return id;
 	}
@@ -53,29 +50,6 @@ public class Menu implements Serializable{
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
-	public String getCreatedTime() {
-		return createdTime;
-	}
-	public void setCreatedTime(String createdTime) {
-		this.createdTime = createdTime;
-	}
-	public Long getCreateId() {
-		return createId;
-	}
-	public void setCreateId(Long createId) {
-		this.createId = createId;
-	}
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
-	public void setUpdatedTime(Date updatedTime) {
-		this.updatedTime = updatedTime;
-	}
-	public Long getUpdated_id() {
-		return updated_id;
-	}
-	public void setUpdated_id(Long updated_id) {
-		this.updated_id = updated_id;
-	}
+
 
 }

@@ -3,9 +3,11 @@ package com.hlbb.module.crew;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -49,7 +51,8 @@ public class Crew implements Serializable{
 	private int isSchoolPerfect;
 	private Date lastLoginTime;
 	
-	@OneToOne(mappedBy="crewId")
+	@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="crew_id")
 	private JobIntent jobIntent;
 	
 	public Long getId() {

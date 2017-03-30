@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.hlbb.module.constant.Constant;
 import com.hlbb.module.constant.ConstantDao;
+import com.hlbb.module.manager.Manager;
+import com.hlbb.module.manager.ManagerDao;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,10 +20,16 @@ public class HlbbApplicationTests {
 	@Autowired
 	private ConstantDao constantDao;
 	
+	@Autowired
+	private ManagerDao managerDao;
+	
 	@Test
 	public void contextLoads() {
 		List<Constant> list =  constantDao.findByTypeNo("company_nature");
 		list.forEach(item->System.out.println(item.getContent()));
+		
+		Manager mng = managerDao.findById(1l);
+		System.out.println(mng.getLoginName());
 	}
 
 }
