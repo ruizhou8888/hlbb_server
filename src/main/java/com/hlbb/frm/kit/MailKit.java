@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailKit {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 	
 	@Autowired  
     private JavaMailSender mailSender;  
@@ -45,5 +49,6 @@ public class MailKit {
     	long code = Math.round(Math.random()*9000+1000);
     	String content = "<p>Hi,"+to+"</p><p>感谢您注册海里巴巴！验证码："+code+"</p><p>如果您没有进行此操作，请忽略该邮件。</p>";
     	sendHtmlMail(to,subject,content);
+    	stringRedisTemplate.opsForValue().set(to,code+"");//将验证码加入redis中 后面进行验证
     }
 }
