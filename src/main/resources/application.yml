@@ -25,4 +25,12 @@ spring:
     database: MYSQL
     hibernate:
       ddl-auto: none
+  mail:
+    host: smtp.exmail.qq.com
+    username: tech@hilibaba.com
+    password: Zhou1990rui
+    properties:
+      mail:
+        smtp:
+          auth: true
       
