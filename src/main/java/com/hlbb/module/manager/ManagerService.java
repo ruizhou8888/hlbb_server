@@ -24,4 +24,19 @@ public class ManagerService {
 		}
 		return mng;
 	}
+
+	public void register(String loginName,String code,String password,String surepwd) {
+		Manager mng = managerDao.findByLoginName(loginName);
+		if(mng!=null){
+			throw new GlobalException(ResultEnum.EXSIS_USER);
+		}
+		if(!password.equals(surepwd)){
+			throw new GlobalException(ResultEnum.PWD_NOSAME);
+		}
+		String salt = String.valueOf(Math.round(Math.random()*9000+1000));
+		Manager mngd = new Manager();
+		mngd.setLoginName(loginName);
+		mngd.setRandomFactor(salt);
+		mngd.setPassword(password);
+	}
 }

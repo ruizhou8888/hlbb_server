@@ -12,6 +12,8 @@ public enum ResultEnum {
     SIGN_ERROR(101,"签名参数错误"),
     NOTFOUND_USER(1001,"用户名或密码错误"),
     NOTEXSIS_USER(1002,"用户名不存在"),
+    EXSIS_USER(1003,"邮箱已注册"),
+    PWD_NOSAME(1005,"两次输入密码不一致"),
     ;
 
     private Integer code;
