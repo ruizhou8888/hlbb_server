@@ -2,10 +2,12 @@ package com.hlbb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hlbb.module.manager.Manager;
+import com.hlbb.frm.config.Result;
+import com.hlbb.frm.kit.ResultKit;
 import com.hlbb.module.manager.ManagerDao;
 import com.hlbb.module.manager.ManagerService;
 
@@ -19,12 +21,17 @@ public class ManagerCtrl {
 	private ManagerService managerService;
 	
 	@GetMapping("/getManagerById")
-	public Manager getManagerById(Long id){
-		return managerDao.findById(id);
+	public Result getManagerById(Long id){
+		return ResultKit.success(managerDao.findById(id));
 	}
 	
 	@GetMapping("/login")
-	public Manager login(String userName,String password){
-		return managerService.login(userName, password);
+	public Result login(String userName,String password){
+		return ResultKit.success(managerService.login(userName, password));
+	}
+	
+	@PostMapping("/register")
+	public Result register(String email,String password,String checkCode,String surepwd){
+		return ResultKit.success(managerService.register(email, password,surepwd,checkCode));
 	}
 }

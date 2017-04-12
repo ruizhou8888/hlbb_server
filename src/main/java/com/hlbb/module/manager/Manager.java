@@ -29,6 +29,13 @@ public class Manager implements Serializable{
 	private int isActive;
 	private int state;
 	
+	public Manager(){}
+	public Manager(String loginName,String password,String randomFactor){
+		this.loginName = loginName;
+		this.password = password;
+		this.randomFactor = randomFactor;
+	}
+	
 	@OneToOne
 	@JoinColumn(name="companyId")
 	private Company company;
