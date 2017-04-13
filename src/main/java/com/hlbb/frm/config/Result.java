@@ -3,10 +3,10 @@ package com.hlbb.frm.config;
 /**
  * Created by Rui.Zhou on 2017/3/20.
  */
-public class Result<T> {
+public class Result {
     private Integer code;
     private String msg;
-    private T data;
+    private Object data;
 
     public Result(Integer code, String msg) {
         this.code = code;
@@ -29,11 +29,11 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 }
