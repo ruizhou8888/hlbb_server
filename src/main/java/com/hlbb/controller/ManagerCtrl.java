@@ -31,7 +31,8 @@ public class ManagerCtrl {
 	}
 	
 	@PostMapping("/register")
-	public Result register(String email,String password,String checkCode,String surepwd){
-		return ResultKit.success(managerService.register(email, password,surepwd,checkCode));
+	public Result register(String loginName,String password,String checkCode,String surepwd){
+		return ResultKit.success(managerService.register(loginName, password,surepwd,checkCode));
 	}
+
 }

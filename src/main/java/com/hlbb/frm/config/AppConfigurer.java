@@ -18,9 +18,7 @@ public class AppConfigurer extends WebMvcConfigurerAdapter {
         SignInterceptor signInterceptor = new SignInterceptor();
 
         InterceptorRegistration signIR = registry.addInterceptor(signInterceptor);
-        signIR.addPathPatterns("/**");
-        signIR.excludePathPatterns("/test/**");//排除路由不走该拦截器 如（用户登录不需要sign验证）
-        signIR.excludePathPatterns("/mng/**");
+        signIR.addPathPatterns("/api/**");
         
         super.addInterceptors(registry);
     }
