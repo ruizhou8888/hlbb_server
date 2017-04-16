@@ -13,7 +13,7 @@ import com.hlbb.frm.kit.ResultKit;
 @RestController
 @RequestMapping("/common")
 public class CommonCtrl {
-	
+
 	@Autowired
 	private MailKit mailKit;
 	
@@ -21,7 +21,7 @@ public class CommonCtrl {
 	public void upload(MultipartFile file){
 		
 	}
-	
+
 	@PostMapping("/getEmailCode")
 	public Result getEmailCode(String email){
 		mailKit.sendEmailCode(email);

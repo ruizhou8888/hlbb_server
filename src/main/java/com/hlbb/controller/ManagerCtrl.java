@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hlbb.frm.config.Result;
 import com.hlbb.frm.kit.ResultKit;
+import com.hlbb.module.manager.Manager;
 import com.hlbb.module.manager.ManagerDao;
 import com.hlbb.module.manager.ManagerService;
 
@@ -26,10 +27,10 @@ public class ManagerCtrl {
 	}
 	
 	@GetMapping("/login")
-	public Result login(String userName,String password){
-		return ResultKit.success(managerService.login(userName, password));
+	public Manager login(String userName,String password){
+		return managerService.login(userName, password);
 	}
-	
+
 	@PostMapping("/register")
 	public Result register(String loginName,String password,String checkCode,String surepwd){
 		return ResultKit.success(managerService.register(loginName, password,surepwd,checkCode));
