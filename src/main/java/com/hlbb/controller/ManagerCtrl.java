@@ -22,7 +22,7 @@ public class ManagerCtrl {
 	
 	@GetMapping("/getManagerById")
 	public Result getManagerById(Long id){
-		return ResultKit.success(managerDao.findById(id));
+		return ResultKit.success(managerDao.findOne(id));
 	}
 	
 	@GetMapping("/login")
