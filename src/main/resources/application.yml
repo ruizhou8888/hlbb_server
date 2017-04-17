@@ -1,6 +1,6 @@
 appId: 2017hlbb
 server:
-  port: 9000
+  port: 9001
   context-path: /hlbb
 spring:
   redis:

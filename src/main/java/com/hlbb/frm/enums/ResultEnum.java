@@ -6,6 +6,7 @@ package com.hlbb.frm.enums;
  */
 public enum ResultEnum {
 
+	UPLOAD_ERROR(-2,"文件上传失败"),
     UNKOWN_ERROR(-1,"未知错误"),
     SUCCESS(0,"成功"),
     SIGN_PARAM_ERROR(103,"缺少签名参数"),
