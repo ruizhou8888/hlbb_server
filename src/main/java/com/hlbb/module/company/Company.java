@@ -24,6 +24,11 @@ public class Company implements Serializable{
 	private String website;
 	private String remark;
 	private String businessNo;
+	
+	private String businessLicencePath;
+	private String assignmentPath;
+	private String firstDivisionPath;
+	
 	private String contactName;
 	private String contactPhone;
 	private String region;
@@ -148,6 +153,24 @@ public class Company implements Serializable{
 	}
 	public void setSubmitReviewTime(Date submitReviewTime) {
 		this.submitReviewTime = submitReviewTime;
+	}
+	public String getBusinessLicencePath() {
+		return businessLicencePath;
+	}
+	public void setBusinessLicencePath(String businessLicencePath) {
+		this.businessLicencePath = businessLicencePath;
+	}
+	public String getAssignmentPath() {
+		return assignmentPath;
+	}
+	public void setAssignmentPath(String assignmentPath) {
+		this.assignmentPath = assignmentPath;
+	}
+	public String getFirstDivisionPath() {
+		return firstDivisionPath;
+	}
+	public void setFirstDivisionPath(String firstDivisionPath) {
+		this.firstDivisionPath = firstDivisionPath;
 	}
 	
 }

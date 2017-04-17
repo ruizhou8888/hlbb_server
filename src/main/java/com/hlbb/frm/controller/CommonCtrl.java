@@ -30,25 +30,28 @@ import com.hlbb.frm.kit.ResultKit;
 public class CommonCtrl {
 
 	private final static Logger log = LoggerFactory.getLogger(CommonCtrl.class);
+	private String basePath ="E:/";
+	private String baseUploadPath ="upload/";
 	
 	@Autowired
 	private MailKit mailKit;
 	
 	@PostMapping("/upload")
 	public Result upload(@RequestParam("file")MultipartFile file){
-		String basePath ="E:/upload/";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		String nowDay = sdf.format(new Date());
-		File uploadSource = new File(basePath+nowDay);
+		File uploadSource = new File(basePath+baseUploadPath+nowDay);
 		if(!uploadSource.exists()){
 			uploadSource.mkdirs();
 		}
 		if(!file.isEmpty()){
 		   String newFilePath="";
-           try {
+           String uploadPath = "";
+		   try {
         	  String oldName = file.getOriginalFilename();
         	  String suffix = oldName.substring(oldName.lastIndexOf("."));
-			  newFilePath =basePath + nowDay +"/"+ RandomKit.randomStr()+suffix;
+        	  uploadPath = baseUploadPath +nowDay +"/"+ RandomKit.randomStr()+suffix;
+			  newFilePath =basePath + uploadPath;
               BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(newFilePath)));
               out.write(file.getBytes());
               out.flush();
@@ -60,7 +63,7 @@ public class CommonCtrl {
         	   log.error("上传文件失败",e.getMessage());
         	   return ResultKit.error(ResultEnum.UPLOAD_ERROR);
            }
-           return ResultKit.success(newFilePath);
+           return ResultKit.success(uploadPath);
        }else{
     	   log.error("上传文件失败","上传的文件为空");
     	   return ResultKit.error(ResultEnum.UPLOAD_ERROR);
