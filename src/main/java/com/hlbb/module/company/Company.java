@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="company")
 public class Company implements Serializable{
@@ -17,8 +19,8 @@ public class Company implements Serializable{
 	@GeneratedValue
 	private Long id;
 	private String name;
-	private BigDecimal money;
-	private BigDecimal needPayMoney;
+	private BigDecimal money = new BigDecimal("0");
+	private BigDecimal needPayMoney = new BigDecimal("0");
 	private int readNeedPay;
 	private String logoPath;
 	private String website;
@@ -136,12 +138,16 @@ public class Company implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getCreatedTime() {
 		return createdTime;
 	}
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
 	}
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getUpdateTime() {
 		return updateTime;
 	}

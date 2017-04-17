@@ -9,10 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.hlbb.module.company.Company;
 
 @Entity
 @Table(name="manager")
@@ -28,6 +25,7 @@ public class Manager implements Serializable{
 	private Date lastLoginTime;
 	private int isActive;
 	private int state;
+	private Long companyId;
 	
 	public Manager(){}
 	public Manager(String loginName,String password,String randomFactor){
@@ -36,20 +34,20 @@ public class Manager implements Serializable{
 		this.randomFactor = randomFactor;
 	}
 	
-	@OneToOne
-	@JoinColumn(name="companyId")
-	private Company company;
-	
+	public Manager(Long mngId, Long companyId) {
+		this.id = mngId ;
+		this.companyId = companyId;
+	}
+
 	@OneToMany
 	@JoinColumn(name="managerId")
 	private List<ManagerMenu> menus;
 	
-	
-	public Company getCompany() {
-		return company;
+	public long getCompanyId() {
+		return companyId;
 	}
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setCompanyId(long companyId) {
+		this.companyId = companyId;
 	}
 	public List<ManagerMenu> getMenus() {
 		return menus;
