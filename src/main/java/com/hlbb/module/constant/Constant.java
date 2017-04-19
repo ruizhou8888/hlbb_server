@@ -11,9 +11,9 @@ public class Constant {
 	@GeneratedValue
 	private Long id;
 	private String typeNo;
-	private String content;
+	private String name;
+	private String value;
 	private String contentEn;
-	private Integer relationId;
 	private String remark;
 	private Integer sort;
 	
@@ -29,23 +29,11 @@ public class Constant {
 	public void setTypeNo(String typeNo) {
 		this.typeNo = typeNo;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
 	public String getContentEn() {
 		return contentEn;
 	}
 	public void setContentEn(String contentEn) {
 		this.contentEn = contentEn;
-	}
-	public Integer getRelationId() {
-		return relationId;
-	}
-	public void setRelationId(Integer relationId) {
-		this.relationId = relationId;
 	}
 	public String getRemark() {
 		return remark;
@@ -58,6 +46,18 @@ public class Constant {
 	}
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
 	}
 	
 	

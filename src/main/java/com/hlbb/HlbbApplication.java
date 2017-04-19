@@ -8,6 +8,5 @@ public class HlbbApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HlbbApplication.class, args);
-		
 	}
 }

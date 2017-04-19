@@ -14,7 +14,7 @@ public class ConstantType {
 	@GeneratedValue
 	private Long id;
 	private String typeNo;
-	private String content;
+	private String name;
 	private String remark;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="typeNo")
@@ -32,11 +32,12 @@ public class ConstantType {
 	public void setTypeNo(String typeNo) {
 		this.typeNo = typeNo;
 	}
-	public String getContent() {
-		return content;
+	
+	public String getName() {
+		return name;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getRemark() {
 		return remark;
