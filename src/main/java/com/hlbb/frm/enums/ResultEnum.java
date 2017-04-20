@@ -15,6 +15,8 @@ public enum ResultEnum {
     NOTEXSIS_USER(1002,"用户名不存在"),
     EXSIS_USER(1003,"邮箱已注册"),
     PWD_NOSAME(1005,"两次输入密码不一致"),
+    CONSTTYPE_SAME(1006,"常量编码已存在"),
+    CONSTVALUE_SAME(1007,"同一常量类型值不能重复"),
     ;
 
     private Integer code;

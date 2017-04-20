@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
 import com.hlbb.frm.config.Result;
 import com.hlbb.frm.kit.ResultKit;
+import com.hlbb.module.constant.Constant;
 import com.hlbb.module.constant.ConstantService;
 import com.hlbb.module.constant.ConstantType;
 
@@ -36,6 +37,24 @@ public class ConstantCtrl {
 	public Result delConstantType(String ids){
 		List<ConstantType> cts = JSONObject.parseArray(ids, ConstantType.class);
 		constantService.delConstantType(cts);
+		return ResultKit.success();
+	}
+	@PostMapping("/delConstant")
+	public Result delConstant(String ids){
+		List<Constant> cts = JSONObject.parseArray(ids, Constant.class);
+		constantService.delConstant(cts);
+		return ResultKit.success();
+	}
+	
+	@PostMapping("/saveConstType")
+	public Result saveConstType(ConstantType ct){
+		constantService.saveConstType(ct);
+		return ResultKit.success();
+	}
+	
+	@PostMapping("/saveConstant")
+	public Result saveConstant(Constant ct){
+		constantService.saveConstant(ct);
 		return ResultKit.success();
 	}
 }

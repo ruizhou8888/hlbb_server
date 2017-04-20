@@ -1,5 +1,6 @@
 package com.hlbb.module.constant;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +12,13 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.hlbb.frm.enums.ResultEnum;
+import com.hlbb.frm.exception.GlobalException;
 import com.hlbb.frm.kit.PageKit;
 import com.hlbb.frm.kit.StrKit;
 
@@ -25,7 +30,9 @@ public class ConstantService {
 	private ConstantTypeDao constantTypeDao;
 	
 	public Page<Constant> findConstantByTypeNo(Map<String,String> map){
-		Page<Constant> constants = constantDao.findByTypeNo(map.get("typeNo"),PageKit.buildPageRequest(map));
+		List<Order> orders = new ArrayList<Order>();
+		orders.add(new Order(Direction.ASC,"sort"));
+		Page<Constant> constants = constantDao.findByTypeNo(map.get("typeNo"),PageKit.buildPageRequest(map,orders));
 		return constants;
 	}
 	
@@ -54,5 +61,33 @@ public class ConstantService {
 			constantDao.deleteByTypeNo(typeNo);
 			constantTypeDao.delete(ct.getId());			
 		});
+	}
+	
+	@Transactional
+	public void delConstant(List<Constant> cts){
+		cts.forEach((ct)->{
+			constantDao.delete(ct);		
+		});
+	}
+	
+	public void saveConstType(ConstantType ct){
+		if(ct.getId()==null){
+			String typeNo = ct.getTypeNo();
+			List<ConstantType> cts = constantTypeDao.findByTypeNo(typeNo);
+			if(!cts.isEmpty()){
+				throw new GlobalException(ResultEnum.CONSTTYPE_SAME);
+			}
+		}
+		constantTypeDao.save(ct);
+	}
+
+	public void saveConstant(Constant ct) {
+		if(ct.getId()==null){
+			List<Constant> cts = constantDao.findByTypeNoAndValue(ct.getTypeNo(),ct.getValue());
+			if(!cts.isEmpty()){
+				throw new GlobalException(ResultEnum.CONSTVALUE_SAME);
+			}
+		}
+		constantDao.save(ct);
 	}
 }
