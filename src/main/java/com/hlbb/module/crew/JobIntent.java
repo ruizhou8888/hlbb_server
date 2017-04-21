@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="job_intent")
+@Table(name="crew_job_intent")
 public class JobIntent implements Serializable{
 	private static final long serialVersionUID = -2901778151781648662L;
 	@Id
