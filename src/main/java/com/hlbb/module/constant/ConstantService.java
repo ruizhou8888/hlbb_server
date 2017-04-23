@@ -1,6 +1,5 @@
 package com.hlbb.module.constant;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +29,7 @@ public class ConstantService {
 	private ConstantTypeDao constantTypeDao;
 	
 	public Page<Constant> findConstantByTypeNo(Map<String,String> map){
-		List<Order> orders = new ArrayList<Order>();
-		orders.add(new Order(Direction.ASC,"sort"));
-		Page<Constant> constants = constantDao.findByTypeNo(map.get("typeNo"),PageKit.buildPageRequest(map,orders));
+		Page<Constant> constants = constantDao.findByTypeNo(map.get("typeNo"),PageKit.buildPageRequest(map,new Order(Direction.ASC,"sort")));
 		return constants;
 	}
 	

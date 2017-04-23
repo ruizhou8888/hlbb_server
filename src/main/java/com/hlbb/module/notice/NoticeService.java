@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hlbb.frm.kit.PageKit;
+import com.hlbb.frm.kit.StrKit;
 
 @Service
 public class NoticeService {
@@ -47,7 +48,7 @@ public class NoticeService {
 		String content = map.get("content");
 		String sendType = map.get("sendType");
 		Notice notice = new Notice(title,content,sendType);
-		if(map.get("id")!=null){
+		if(!StrKit.isBlank(map.get("id").toString())){
 			notice.setId(Long.valueOf(map.get("id").toString()));
 		}
 		noticeDao.save(notice);

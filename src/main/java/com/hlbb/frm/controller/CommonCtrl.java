@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hlbb.config.AppConfig;
 import com.hlbb.frm.config.Result;
 import com.hlbb.frm.enums.ResultEnum;
 import com.hlbb.frm.kit.MailKit;
@@ -59,10 +60,41 @@ public class CommonCtrl {
         	   log.error("上传文件失败",e.getMessage());
         	   return ResultKit.error(ResultEnum.UPLOAD_ERROR);
            }
-           return ResultKit.success("files/"+nowDay+"/"+fileName);
+		   return ResultKit.success("files/"+nowDay+"/"+fileName);			   
        }else{
     	   log.error("上传文件失败","上传的文件为空");
     	   return ResultKit.error(ResultEnum.UPLOAD_ERROR);
+       }
+	}
+	
+	@PostMapping("/uploadByWangEditor")
+	public String uploadByWangEditor(@RequestParam("file")MultipartFile file){
+		File uploadSource = new File(basePath);
+		if(!uploadSource.exists()){
+			uploadSource.mkdirs();
+		}
+		if(!file.isEmpty()){
+           String fileName = "";
+		   try {
+        	  String oldName = file.getOriginalFilename();
+        	  String suffix = oldName.substring(oldName.lastIndexOf("."));
+        	  fileName = RandomKit.randomStr()+suffix;
+        	  String uploadPath = basePath + fileName;
+              BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(uploadPath)));
+              out.write(file.getBytes());
+              out.flush();
+              out.close();
+           } catch (FileNotFoundException e) {
+        	   log.error("上传文件失败",e.getMessage());
+        	   return ResultEnum.UPLOAD_ERROR.getMsg();
+           } catch (IOException e) {
+        	   log.error("上传文件失败",e.getMessage());
+        	   return ResultEnum.UPLOAD_ERROR.getMsg();
+           }
+		   return AppConfig.SERVER_IP+"files/"+nowDay+"/"+fileName;			   
+       }else{
+    	   log.error("上传文件失败","上传的文件为空");
+    	   return ResultEnum.UPLOAD_ERROR.getMsg();
        }
 	}
 

@@ -3,6 +3,7 @@ package com.hlbb.module.constant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Constant {
@@ -15,6 +16,7 @@ public class Constant {
 	private String value;
 	private String contentEn;
 	private String remark;
+	@OrderBy("sort ASC ")
 	private Integer sort;
 	
 	public Long getId() {

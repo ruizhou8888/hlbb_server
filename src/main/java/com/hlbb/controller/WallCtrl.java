@@ -1,6 +1,5 @@
 package com.hlbb.controller;
 
-import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,35 +17,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hlbb.frm.config.Result;
 import com.hlbb.frm.kit.ResultKit;
-import com.hlbb.module.company.Company;
-import com.hlbb.module.company.CompanyService;
-
+import com.hlbb.module.wall.CompanyWall;
+import com.hlbb.module.wall.WallService;
 
 @RestController
-@RequestMapping("company")
-public class CompanyCtrl {
+@RequestMapping("wall")
+public class WallCtrl {
 	@Autowired
-	private CompanyService companyService;
+	private WallService wallService;
 	
-	@PostMapping("/perfect")
-	public Result perfect(Company company,@RequestParam("mngId")String mngId) throws FileNotFoundException{
-		return ResultKit.success(companyService.perfect(company,mngId));
+	@GetMapping("/getWalls")
+	public Result getWalls(@RequestParam Map<String,String> paramMap){
+		return ResultKit.success(wallService.getWalls(paramMap));
 	}
+
+    @GetMapping("/getWallById")
+    public Result getWallById(String id){
+        return ResultKit.success(wallService.getWallById(id));
+    }
 	
-	@GetMapping("/getCompanyInfo")
-	public Result perfect(String mngId) throws FileNotFoundException{
-		return ResultKit.success(companyService.getCompanyByMngId(mngId));
+	@PostMapping("/saveWall")
+	public Result saveWall(CompanyWall wall){
+		return ResultKit.success(wallService.saveWall(wall));
 	}
-	
-	@GetMapping("/getCompanys")
-	public Result getCompanys(@RequestParam Map<String,String> map) throws FileNotFoundException{
-		return ResultKit.success(companyService.getCompanys(map));
-	}
-	
+
+
+    @PostMapping("/sendReview")
+    public Result sendReview(CompanyWall wall){
+        wall.setState(1l);
+        wall.setStateNote("正在审核中...");
+        return ResultKit.success(wallService.saveWall(wall));
+    }
+
 	@InitBinder   
     public void initBinder(WebDataBinder binder) {   
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
         dateFormat.setLenient(true);   
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));   
-    } 
+    }
 }

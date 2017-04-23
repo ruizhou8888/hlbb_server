@@ -3,10 +3,9 @@ package com.hlbb.module.notice;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="notice")
@@ -20,6 +19,7 @@ public class Notice implements Serializable{
 	private String content;
 	private Long sendType;
 	private Long createdUid;
+	@OrderBy("createdTime DESC ")
 	private Date createdTime;
 	private Long updateId;
 	private Date updateTime;
@@ -62,6 +62,7 @@ public class Notice implements Serializable{
 	public void setCreatedUid(Long createdUid) {
 		this.createdUid = createdUid;
 	}
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -74,6 +75,7 @@ public class Notice implements Serializable{
 	public void setUpdateId(Long updateId) {
 		this.updateId = updateId;
 	}
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getUpdateTime() {
 		return updateTime;
 	}

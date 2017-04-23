@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hlbb.frm.config.Result;
 import com.hlbb.frm.kit.ResultKit;
-import com.hlbb.module.notice.Notice;
 import com.hlbb.module.notice.NoticeService;
 
 @RestController
